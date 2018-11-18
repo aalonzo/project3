@@ -1,12 +1,11 @@
-
-
-
 try:
     from Tkinter import Entry, Frame, Label, StringVar
     from Tkconstants import *
 except ImportError:
     from tkinter import Entry, Frame, Label, StringVar
     from tkinter.constants import *
+
+from professor import *
 
 
 # this method creats the list for the user input or querry
@@ -167,13 +166,22 @@ if __name__ == "__main__":
         from tkinter import Tk
         from tkinter.messagebox import showinfo
 
-    def command(text):
-        showinfo("search command", "searching:%s"%text)
+    def command(text): 
+        try:
+            query = Professor(text)
+        except Exception:
+            showinfo("search command", "No results found.")
+        else:
+            #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
+            showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty())
+
+        label = Label(text=qu)
+
 
     root = Tk()
     root.geometry("800x600")
     ##root.
     root.title("Search")
-    Search_Bar(root, command=command, placeholder="Search for professors or classes...", entry_highlightthickness=0).pack(pady=6, padx=3)
+    Search_Bar(root, command= command, placeholder="Search for professors or classes...", entry_highlightthickness=0).pack(pady=6, padx=3)
 
     root.mainloop()
