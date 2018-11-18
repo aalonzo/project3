@@ -5,7 +5,13 @@ except ImportError:
     from tkinter import Entry, Frame, Label, StringVar
     from tkinter.constants import *
 
+from PIL import ImageTk, Image
 from professor import *
+import sys
+import os.path
+
+
+INSTALL_DIR = os.getcwd() + "/"
 
 
 # this method creats the list for the user input or querry
@@ -78,7 +84,7 @@ def add_placeholder(entry, placeholder, color="grey", font=None):
 class Search_Bar(Frame):
 
     # An initializer 
-    def __init__(self, master, entry_width=60, entry_font=None, entry_background="white", entry_highlightthickness=1, button_text="Search", button_ipadx=10, button_background="#bf5700", button_foreground="white", button_font=None, opacity=0.8, placeholder=None, placeholder_font=None, placeholder_color="grey", spacing=3, command=None):
+    def __init__(self, master, entry_width=60, entry_font=None, entry_background="white", entry_highlightthickness=1, button_text="Search", button_ipadx=10, button_background="#ffffff", button_foreground="black", button_font=None, opacity=0.8, placeholder=None, placeholder_font=None, placeholder_color="grey", spacing=3, command=None):
         Frame.__init__(self, master)
         
         self._command = command
@@ -174,14 +180,21 @@ if __name__ == "__main__":
         else:
             #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
             showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty())
-
-        label = Label(text=qu)
-
+    
+    # def update_scene(root, milsec, filename):
+    #     self.img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + filename))
+    #     #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+    #     self.master.after(milsec, self.panel.config(image = self.img))
+    #     self.master.update()
 
     root = Tk()
     root.geometry("800x600")
-    ##root.
     root.title("Search")
-    Search_Bar(root, command= command, placeholder="Search for professors or classes...", entry_highlightthickness=0).pack(pady=6, padx=3)
+    root.config(background="#bf5700")
+    Search_Bar(root, command= command, placeholder="Search for professors...", entry_highlightthickness=0).pack(pady=6, padx=3)
 
+    img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "logo.png").resize((500, 500), Image.ANTIALIAS))
+    panel = Label(root, image = img, background="#bf5700")
+
+    panel.pack(side =TOP)
     root.mainloop()
