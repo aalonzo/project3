@@ -1,3 +1,6 @@
+
+
+
 try:
     from Tkinter import Entry, Frame, Label, StringVar
     from Tkconstants import *
@@ -6,9 +9,11 @@ except ImportError:
     from tkinter.constants import *
 
 
-# hex2rgb method is so that we can 
+# this method creats the list for the user input or querry
+# it also returns an error if the user input is wrong.
 def hex2rgb(str_rgb):
     try:
+        
         rgb = str_rgb[1:]
 
         if len(rgb) == 6:
@@ -23,18 +28,20 @@ def hex2rgb(str_rgb):
     return tuple(int(v, 16) for v in (r, g, b))
 
 
-# Comments placeholder_
-class Placeholder_State(object):
+# This class establishes a default in the search bar when nothing is typed
+class Default_State(object):
      __slots__ = 'normal_color', 'normal_font', 'placeholder_text', 'placeholder_color', 'placeholder_font', 'contains_placeholder'
 
-def add_placeholder_to(entry, placeholder, color="grey", font=None):
+# This method allows for a default search bar
+def add_placeholder(entry, placeholder, color="grey", font=None):
     normal_color = entry.cget("fg")
     normal_font = entry.cget("font")
     
     if font is None:
         font = normal_font
 
-    state = Placeholder_State()
+    # State sets the default search bar for the search.
+    state = Default_State()
     state.normal_color=normal_color
     state.normal_font=normal_font
     state.placeholder_color=color
@@ -42,14 +49,15 @@ def add_placeholder_to(entry, placeholder, color="grey", font=None):
     state.placeholder_text = placeholder
     state.contains_placeholder=True
 
-    def on_focusin(event, entry=entry, state=state):
+
+    def on_focus_in(event, entry=entry, state=state):
         if state.contains_placeholder:
             entry.delete(0, "end")
             entry.config(fg = state.normal_color, font=state.normal_font)
         
             state.contains_placeholder = False
 
-    def on_focusout(event, entry=entry, state=state):
+    def on_focus_out(event, entry=entry, state=state):
         if entry.get() == '':
             entry.insert(0, state.placeholder_text)
             entry.config(fg = state.placeholder_color, font=state.placeholder_font)
@@ -59,15 +67,18 @@ def add_placeholder_to(entry, placeholder, color="grey", font=None):
     entry.insert(0, placeholder)
     entry.config(fg = color, font=font)
 
-    entry.bind('<FocusIn>', on_focusin, add="+")
-    entry.bind('<FocusOut>', on_focusout, add="+")
+    entry.bind('<FocusIn>', on_focus_in, add="+")
+    entry.bind('<FocusOut>', on_focus_out, add="+")
     
     entry.placeholder_state = state
 
     return state
 
-class SearchBox(Frame):
-    
+
+# A search bar class
+class Search_Bar(Frame):
+
+    # An initializer 
     def __init__(self, master, entry_width=60, entry_font=None, entry_background="white", entry_highlightthickness=1, button_text="Search", button_ipadx=10, button_background="#bf5700", button_foreground="white", button_font=None, opacity=0.8, placeholder=None, placeholder_font=None, placeholder_color="grey", spacing=3, command=None):
         Frame.__init__(self, master)
         
@@ -80,7 +91,7 @@ class SearchBox(Frame):
             self.entry.configure(font=entry_font)
 
         if placeholder:
-            add_placeholder_to(self.entry, placeholder, color=placeholder_color, font=placeholder_font)
+            add_placeholder(self.entry, placeholder, color=placeholder_color, font=placeholder_font)
 
         self.entry.bind("<Escape>", lambda event: self.entry.nametowidget(".").focus())
         self.entry.bind("<Return>", self._on_execute_command)
@@ -90,13 +101,12 @@ class SearchBox(Frame):
         if button_background.startswith("#"):
             r,g,b = hex2rgb(button_background)
         else:
-            # Color name
             r,g,b = master.winfo_rgb(button_background)
 
         r = int(opacity*r)
         g = int(opacity*g)
         b = int(opacity*b)
-
+        
         if r <= 255 and g <= 255 and b <=255:
             self._button_activebackground = '#%02x%02x%02x' % (r,g,b)
         else:
@@ -162,7 +172,8 @@ if __name__ == "__main__":
 
     root = Tk()
     root.geometry("800x600")
+    ##root.
     root.title("Search")
-    SearchBox(root, command=command, placeholder="Search for professors or classes...", entry_highlightthickness=0).pack(pady=6, padx=3)
+    Search_Bar(root, command=command, placeholder="Search for professors or classes...", entry_highlightthickness=0).pack(pady=6, padx=3)
 
     root.mainloop()
