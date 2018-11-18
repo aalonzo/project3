@@ -48,10 +48,9 @@ class Professor:
 	
 	def __init__(self, name):
 		self.name = name
-		try:
-			self.url = find_professor(self.name)
-		except:
-			self.url = None
+		self.url = find_professor(self.name)
+		if self.url is None:
+			raise Exception("NoProfessorError")
 		try:
 			self.rating = get_rating(self.url).split()[0]
 		except:
