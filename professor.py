@@ -44,3 +44,36 @@ def get_difficulty(link):
 
 # Example try: print(get_difficulty(find_professor('Jesse Miller')))
 
+class Professor:
+	
+	def __init__(self, name):
+		self.name = name
+		try:
+			self.url = find_professor(self.name)
+		except:
+			self.url = None
+		try:
+			self.rating = get_rating(self.url).split()[0]
+		except:
+			self.rating = None
+		try:
+			self.reviews = get_reviews(self.url)
+		except:
+			self.reviews = None
+		try:
+			self.difficulty = get_difficulty(self.url).split()[0]
+		except:
+			self.difficulty = None
+			
+	def getURL(self):
+		return self.url
+	
+	def getRating(self):
+		return self.rating
+		
+	def getReviews(self):
+		return self.reviews
+		
+	def getDifficulty(self):
+		return self.difficulty
+
