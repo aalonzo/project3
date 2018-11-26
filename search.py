@@ -1,8 +1,9 @@
 try:
-    from Tkinter import Entry, Frame, Label, StringVar
+    from Tkinter import * 
+    #Entry, Frame, Label, StringVar
     from Tkconstants import *
 except ImportError:
-    from tkinter import Entry, Frame, Label, StringVar
+    from tkinter import *
     from tkinter.constants import *
 
 from PIL import ImageTk, Image
@@ -176,24 +177,35 @@ if __name__ == "__main__":
         try:
             query = Professor(text)
         except Exception:
-            showinfo("search command", "No results found.")
+            #showinfo("search command", "No results found.")
+            new_window = Toplevel(root)
+            new_window.title("Results for \"" + text + "\"")
+            no_result = Label(new_window, text="No results found.")
+            img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "results.png").resize((800, 600), Image.ANTIALIAS))
+            bground = Label(new_window, image = img, background="#bf5700")
+
+            bground.place(relx=0.5, rely=0.5, anchor=CENTER)
+            no_result.pack(new_window)
         else:
             #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
-            showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
+            #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
+            new_window = Toplevel(root)
+            new_window.title("Results for \"" + text + "\"")
+            no_result = Label(text="1 result found.")
+            no_result.pack(new_window)
     
     # def update_scene(root, milsec, filename):
     #     self.img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + filename))
     #     #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
     #     self.master.after(milsec, self.panel.config(image = self.img))
     #     self.master.update()
-
     root = Tk()
     root.geometry("800x600")
     root.title("Search")
     root.config(background="#bf5700")
 
     img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "home.png").resize((800, 600), Image.ANTIALIAS))
-   # img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "home.png"))
+    # img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "home.png"))
     panel = Label(root, image = img, background="#bf5700")
 
 
