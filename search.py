@@ -173,26 +173,30 @@ if __name__ == "__main__":
         from tkinter import Tk
         from tkinter.messagebox import showinfo
 
-    def command(text): 
-        try:
-            query = Professor(text)
-        except Exception:
-            #showinfo("search command", "No results found.")
-            new_window = Toplevel(root)
-            new_window.title("Results for \"" + text + "\"")
-            no_result = Label(new_window, text="No results found.")
-            img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "results.png").resize((800, 600), Image.ANTIALIAS))
-            bground = Label(new_window, image = img, background="#bf5700")
+    def command(text):
+        new_window = Toplevel(root)
+        new_window.geometry("800x600")
+        new_window.title("Results for \"" + text + "\"")
+        no_result = Label(new_window, text="No results found.")
+        img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "results.png").resize((800, 600), Image.ANTIALIAS))
+        bground = Label(new_window, image = img, background="#bf5700")
 
-            bground.place(relx=0.5, rely=0.5, anchor=CENTER)
-            no_result.pack(new_window)
-        else:
-            #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
-            #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
-            new_window = Toplevel(root)
-            new_window.title("Results for \"" + text + "\"")
-            no_result = Label(text="1 result found.")
-            no_result.pack(new_window)
+        bground.place(relx=0.5, rely=0.5, anchor=CENTER)
+        no_result.pack(side=BOTTOM, pady=30)
+        # try:
+        #     query = Professor(text)
+        # except Exception:
+        #     #showinfo("search command", "No results found.")
+
+        # else:
+        #     #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
+        #     #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
+        #     new_window = Toplevel(root)
+        #     new_window.title("Results for \"" + text + "\"")
+        #     no_result = Label(text="1 result found.")
+        #     no_result.pack()
+
+        new_window.mainloop()
     
     # def update_scene(root, milsec, filename):
     #     self.img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + filename))
