@@ -186,7 +186,7 @@ if __name__ == "__main__":
         Search_Bar(new_window, command=command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=TOP, anchor="ne", pady=40, padx=50)
 
         button_frame = Frame(new_window, height=2, bd=5, relief=FLAT)
-        button_frame.pack(side=TOP, pady=10)
+        button_frame.pack(side=TOP, anchor="nw", pady=10)
         no_result = Label(new_window, text="", fg="black")
         no_result.pack(in_=button_frame, anchor=CENTER)
         
@@ -205,6 +205,7 @@ if __name__ == "__main__":
             else:
                 for i in range(len(results)):
                     print(results[i].getName())
+                    Button(new_window, text=results[i].getName() + ", Difficulty: " + str(results[i].getDifficulty()) + ", Rating: " + str(results[i].getRating()), padx=5, pady=5).pack(side=TOP, anchor="nw")
                 no_result.config(text=str(len(results)) + " result(s) found.")
                 no_result.update()
 
