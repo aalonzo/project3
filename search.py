@@ -179,32 +179,34 @@ if __name__ == "__main__":
         new_window = Toplevel(root)
         new_window.geometry("800x600")
         new_window.title("Results for \"" + text + "\"")
-        no_result = Label(new_window, text="No results found.", bg="black")
         img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "results.png").resize((800, 600), Image.ANTIALIAS))
         bground = Label(new_window, image = img, background="#bf5700")
 
         bground.place(relx=0.5, rely=0.5, anchor=CENTER)
-        Search_Bar(new_window, command= command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=TOP, anchor="ne", pady=40, padx=50)
+        Search_Bar(new_window, command=command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=TOP, anchor="ne", pady=40, padx=50)
 
-        button_frame = Frame(new_window, height=2, bd=1, relief=SUNKEN)
-        button_frame.pack(side=TOP)
+        button_frame = Frame(new_window, height=2, bd=5, relief=FLAT)
+        button_frame.pack(side=TOP, pady=10)
+        no_result = Label(new_window, text="", fg="black")
         no_result.pack(in_=button_frame, anchor=CENTER)
         
+        try:
+            query = Professor(text)
+        except Exception:
+            showinfo("search command", "No results found.")
 
-        
-        
-        # try:
-        #     query = Professor(text)
-        # except Exception:
-        #     #showinfo("search command", "No results found.")
-
-        # else:
-        #     #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
-        #     #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
-        #     new_window = Toplevel(root)
-        #     new_window.title("Results for \"" + text + "\"")
-        #     no_result = Label(text="1 result found.")
-        #     no_result.pack()
+        else:
+            #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
+            #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
+            results = professor_search(text)
+            print(len(results))
+            if ( len(results) == 0 ):
+                no_result.config(text="No results found for \"" + text + "\"", fg="black")
+            else:
+                for i in range(len(results)):
+                    print(results[i].getName())
+                no_result.config(text=str(len(results)) + " result(s) found.")
+                no_result.update()
 
         new_window.mainloop()
     
