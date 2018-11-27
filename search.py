@@ -10,6 +10,7 @@ from PIL import ImageTk, Image
 from professor import *
 import sys
 import os.path
+import turtle
 
 
 INSTALL_DIR = os.getcwd() + "/"
@@ -164,6 +165,7 @@ class Search_Bar(Frame):
 
     def _state_active(self, event):
         self.button_label.configure(background=self._button_activebackground)
+    
         
 if __name__ == "__main__":
     try:
@@ -177,12 +179,20 @@ if __name__ == "__main__":
         new_window = Toplevel(root)
         new_window.geometry("800x600")
         new_window.title("Results for \"" + text + "\"")
-        no_result = Label(new_window, text="No results found.")
+        no_result = Label(new_window, text="No results found.", bg="black")
         img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "results.png").resize((800, 600), Image.ANTIALIAS))
         bground = Label(new_window, image = img, background="#bf5700")
 
         bground.place(relx=0.5, rely=0.5, anchor=CENTER)
-        no_result.pack(side=BOTTOM, pady=30)
+        Search_Bar(new_window, command= command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=TOP, anchor="ne", pady=40, padx=50)
+
+        button_frame = Frame(new_window, height=2, bd=1, relief=SUNKEN)
+        button_frame.pack(side=TOP)
+        no_result.pack(in_=button_frame, anchor=CENTER)
+        
+
+        
+        
         # try:
         #     query = Professor(text)
         # except Exception:
@@ -203,6 +213,7 @@ if __name__ == "__main__":
     #     #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
     #     self.master.after(milsec, self.panel.config(image = self.img))
     #     self.master.update()
+
     root = Tk()
     root.geometry("800x600")
     root.title("Search")
