@@ -24,6 +24,17 @@ def find_professor(professor):
 			linkslist.append(link)
 	return linkslist
 	
+	
+def get_name(link):
+	url= BASE + link[1:]
+	links = search(url)
+	text = links.find("title").text.strip().split()
+	if text[0] == "Add":
+		name = text[5] + " " + text[6]
+	else:
+		name = text[0] + " " + text[1]
+	return name
+	
 # Returns overall rating
 def get_rating(link):
     url= BASE + link[1:]
@@ -58,8 +69,8 @@ def professor_search(name):
 class Professor:
 	
 	def __init__(self, url):
-		self.name = "Not fixed yet"
 		self.url = url
+		self.name = get_name(self.url)
 		if self.url is None:
 			raise Exception("NoProfessorError")
 		try:
@@ -87,5 +98,5 @@ class Professor:
 	def getDifficulty(self):
 		return self.difficulty
 
-
-		
+	def getName(self):
+		return self.name
