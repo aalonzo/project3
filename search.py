@@ -190,24 +190,19 @@ if __name__ == "__main__":
         no_result = Label(new_window, text="", fg="black")
         no_result.pack(in_=button_frame, anchor=CENTER)
         
-        try:
-            query = Professor(text)
-        except Exception:
-            showinfo("search command", "No results found.")
-
+    
+        #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
+        #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
+        results = professor_search(text)
+        print(len(results))
+        if ( len(results) == 0 ):
+            no_result.config(text="No results found for \"" + text + "\"", fg="black")
         else:
-            #showinfo("search command", "searching:%s\nDifficulty: %s\nRating: %s"%text%str(query.getDifficulty())%str(query.getRating()))
-            #showinfo("search command", "searching: " + text + "\nRating: " + query.getRating() + "\n" + "Difficulty: " + query.getDifficulty() + "\ncomments: " + str(query.getReviews()))
-            results = professor_search(text)
-            print(len(results))
-            if ( len(results) == 0 ):
-                no_result.config(text="No results found for \"" + text + "\"", fg="black")
-            else:
-                for i in range(len(results)):
-                    print(results[i].getName())
-                    Button(new_window, text=results[i].getName() + ", Difficulty: " + str(results[i].getDifficulty()) + ", Rating: " + str(results[i].getRating()), padx=5, pady=5).pack(side=TOP, anchor="nw")
-                no_result.config(text=str(len(results)) + " result(s) found.")
-                no_result.update()
+            for i in range(len(results)):
+                print(results[i].getName())
+                Button(new_window, text=results[i].getName() + ", Difficulty: " + str(results[i].getDifficulty()) + ", Rating: " + str(results[i].getRating()), padx=5, pady=5, command=lambda i=i: display_comment(results[i])).pack(side=TOP, anchor="nw")
+            no_result.config(text=str(len(results)) + " result(s) found.")
+            no_result.update()
 
         new_window.mainloop()
     
@@ -216,6 +211,22 @@ if __name__ == "__main__":
     #     #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
     #     self.master.after(milsec, self.panel.config(image = self.img))
     #     self.master.update()
+    def display_comment(result):
+        res_window = Toplevel(root)
+        res_window.geometry("800x600")
+        res_window.title("Comments about " + result.getName())
+        header = Label(res_window, text="Comments From Others", font=('Arial', 36), bg="#bf5700", fg="white", justify=LEFT)
+        header.pack(side=TOP, anchor="nw", fill="x")
+        reviews = result.getReviews()
+        print(reviews)
+        scrollbar = Scrollbar(res_window)
+        scrollbar.pack(side=RIGHT, fill=Y)
+        comment_box = Text(res_window, wrap=WORD, yscrollcommand=scrollbar.set)
+        for i in range(len(reviews)):
+            comment_box.insert(END, str(i+1) + ". " + reviews[i] + "\n\n")
+        comment_box.pack(side=LEFT, fill=BOTH)
+        scrollbar.config(command=comment_box.yview)
+        res_window.mainloop()
 
     root = Tk()
     root.geometry("800x600")
