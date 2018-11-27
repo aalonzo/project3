@@ -1,3 +1,7 @@
+import unittest
+#from search import *
+
+############################PLACE search.py HERE################################
 try:
     from Tkinter import * 
     #Entry, Frame, Label, StringVar
@@ -246,7 +250,8 @@ symbols. Please enter text containing only alphabetical characters and spaces.")
         comment_box.pack(side=LEFT, fill=BOTH)
         scrollbar.config(command=comment_box.yview)
         res_window.mainloop()
-
+        
+'''
     root = Tk()
     root.geometry("800x600")
     root.title("Search")
@@ -260,3 +265,15 @@ symbols. Please enter text containing only alphabetical characters and spaces.")
     panel.place(relx=0.5, rely=0.5, anchor=CENTER)
     Search_Bar(root, command= command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=BOTTOM, pady=130, padx=3)
     root.mainloop()
+    '''
+
+#################################################################################
+
+class test_Main(unittest.TestCase):
+
+    def test_2_invalid_input(self):
+        self.assertRaises(Exception, command, "")
+        self.assertRaises(Exception, command, "?????")
+
+if __name__ == '__main__':
+    unittest.main()
