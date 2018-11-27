@@ -12,16 +12,29 @@ def search(url):
 
 # returns link to ratemyprofessor page
 def find_professor(professor):
-
-    professor = professor.replace(" ","+")
-
-    links = search('http://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=University+of+Texas+at+Austin&schoolID=1255&query={})'.format(professor))
-
-    for link in links.find_all('a'):
-        link = link.get('href')
-        if link != None and '/ShowRatings' in link:
-            return link
-
+	
+	professor = professor.replace(" ","+")
+	
+	links = search('http://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=University+of+Texas+at+Austin&schoolID=1255&query={})'.format(professor))
+	linkslist = []
+	
+	for link in links.find_all('a'):
+		link = link.get('href')
+		if link != None and '/ShowRatings' in link:
+			linkslist.append(link)
+	return linkslist
+	
+	
+def get_name(link):
+	url= BASE + link[1:]
+	links = search(url)
+	text = links.find("title").text.strip().split()
+	if text[0] == "Add":
+		name = text[5] + " " + text[6]
+	else:
+		name = text[0] + " " + text[1]
+	return name
+	
 # Returns overall rating
 def get_rating(link):
     url= BASE + link[1:]
@@ -44,11 +57,20 @@ def get_difficulty(link):
 
 # Example try: print(get_difficulty(find_professor('Jesse Miller')))
 
+
+#Returns a list of Professor objects
+def professor_search(name):
+	list = find_professor(name)
+	proflist = []
+	for item in list:
+		proflist.append(Professor(item))
+	return proflist
+
 class Professor:
 	
-	def __init__(self, name):
-		self.name = name
-		self.url = find_professor(self.name)
+	def __init__(self, url):
+		self.url = url
+		self.name = get_name(self.url)
 		if self.url is None:
 			raise Exception("NoProfessorError")
 		try:
@@ -76,3 +98,5 @@ class Professor:
 	def getDifficulty(self):
 		return self.difficulty
 
+	def getName(self):
+		return self.name
