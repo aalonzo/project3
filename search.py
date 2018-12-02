@@ -85,7 +85,7 @@ def add_placeholder(entry, placeholder, color="grey", font=None):
 # A search bar class
 class Search_Bar(Frame):
 
-    # An initializer 
+    # An initializer
     def __init__(self, master, entry_width=30, entry_font=None, entry_background="white", entry_highlightthickness=1, button_text="Search", button_ipadx=10, button_background="#ffffff", button_foreground="black", button_font=None, opacity=0.8, placeholder=None, placeholder_font=None, placeholder_color="grey", spacing=3, command=None):
         Frame.__init__(self, master)
         
@@ -166,7 +166,7 @@ class Search_Bar(Frame):
     def _state_active(self, event):
         self.button_label.configure(background=self._button_activebackground)
     
-        
+
 if __name__ == "__main__":
     try:
         from Tkinter import Tk
