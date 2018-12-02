@@ -3,7 +3,7 @@ class Course:
             self.name=n
             self.timecode=t
             self.gradepoints=gp
-        def getTime:
+        def getTime():
             time=""
             timeraw=str(timecode)
             if timeraw[0]==1:
