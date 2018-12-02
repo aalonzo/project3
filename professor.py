@@ -100,3 +100,22 @@ class Professor:
 
 	def getName(self):
 		return self.name
+
+'''
+def main():
+    user_input = input("Enter a professor name: ")
+    results_lst = professor_search(user_input)
+    #print(results_lst)
+    print("Results:\n")
+    x = 1
+    for i in results_lst:
+        print("Result #" + str(x) + ":\n")
+        print("URL: " + str(i.url))
+        print("Rating: " + str(i.rating))
+        print("Difficulty: " + str(i.difficulty) + "\n")
+        x += 1
+    print("End of Search")
+
+main()
+'''
+    
