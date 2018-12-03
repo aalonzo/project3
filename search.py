@@ -1,5 +1,5 @@
 try:
-    from Tkinter import * 
+    from Tkinter import *
     #Entry, Frame, Label, StringVar
     from Tkconstants import *
 except ImportError:
