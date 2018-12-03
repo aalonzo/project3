@@ -8,7 +8,7 @@ class Course:
             return self.name
         def getTimecode(self):
             return self.timecode
-        def getGP(self)
+        def getGP(self):
             return self.gradepoints
         
         def getFullTime(self):
@@ -39,11 +39,11 @@ class Course:
             timetemp2=timeraw[9:13]
             if int(timetemp2)<1200:
                 time=time+timeraw[9:11]+":"+timeraw[11:13]+" AM"
-            elif int(timetemp2)<1300:
+            elif int(timetemp2)<1300: 
                 time=time+timeraw[9:11]+":"+timeraw[11:13]+" PM"
             else:
                 timeconv=str(int(timeraw[9:11])-12)
-                time=time+timeconv+":"+timeraw[9:11]+" PM"
+                time=time+timeconv+":"+timeraw[11:13]+" PM"
 
             return time
 
@@ -56,9 +56,9 @@ class Course:
             daylist1=list(timeraw1[0:5])
             daylist2=list(timeraw2[0:5])
             for i in range(daylist1.count('0')):
-                remove('0')
+                daylist1.remove('0')
             for j in range(daylist2.count('0')):
-                remove('0')
+                daylist2.remove('0')
             for i in daylist1:
                 for j in daylist2:
                     if i==j:
@@ -67,18 +67,20 @@ class Course:
                 
         def getStartTime(self):
             timeraw=str(self.timecode)
-            return int(timeraw[1:5])
+            return int(timeraw[5:9])
         
         def getEndTime(self):
             timeraw=str(self.timecode)
-            return int(timeraw[5:9])
+            return int(timeraw[9:13])
         
         def compareTimes(self,other):
-            if sameDays(self,other):
+            if self.sameDays(other):
                 if other.getStartTime()==self.getStartTime():
                     return False
                 elif other.getStartTime()<=self.getStartTime() and other.getEndTime()>self.getStartTime():
                     return False
                 elif other.getStartTime()>=self.getStartTime() and other.getStartTime()<self.getEndTime():
                     return False
+                elif other.getStartTime()==self.getEndTime():
+                    return True
             return True
