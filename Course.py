@@ -4,38 +4,42 @@ class Course:
             self.timecode=t
             self.gradepoints=gp
 
-        def getTime():
+        def getTime(self):
             time=""
-            timeraw=str(timecode)
-            if timeraw[0]==1:
+            timeraw=str(self.timecode)
+            if timeraw[0]=='1':
                 time+="Monday "
-            elif timeraw[0]==2:
+            elif timeraw[0]=='2':
                 time+="Tuesday "
-            elif timeraw[0]==3:
+            elif timeraw[0]=='3':
                 time+="Wednesday "
-            elif timeraw[0]==4:
+            elif timeraw[0]=='4':
                 time+="Thursday "
-            elif timeraw[0]==5:
+            elif timeraw[0]=='5':
                 time+="Friday "
 
             timetemp1=timeraw[1:5]
-            if timetemp1<1200:
-                time=time+timetemp1[1:3]+":"+timetemp1[3:5]+ " AM "
-            elif timetemp1<1300:
-                time=time+timetemp1[1:3]+":"+timetemp1[3:5]+" PM "
+            if int(timetemp1)<1200:
+                time=time+timeraw[1:3]+":"+timeraw[3:5]+ " AM "
+            elif int(timetemp1)<1300:
+                time=time+timeraw[1:3]+":"+timeraw[3:5]+" PM "
             else:
-                timeconv=str(int(timetemp1[1:3])-12)
-                time=time+timeconv+":"+timetemp1[3:5]+" PM "
+                timeconv=str(int(timeraw[1:3])-12)
+                time=time+timeconv+":"+timeraw[3:5]+" PM "
 
             time+= "to "
-
+            
             timetemp2=timeraw[5:9]
-            if timetemp2<1200:
-                time=time+timetemp2[5:7]+":"+timetemp2[7:9]+" AM"
-            elif timetemp2<1300:
-                time=time+timetemp2[5:7]+":"+timetemp2[7:9]+" PM"
+            if int(timetemp2)<1200:
+                time=time+timeraw[5:7]+":"+timeraw[7:9]+" AM"
+            elif int(timetemp2)<1300:
+                time=time+timeraw[5:7]+":"+timeraw[7:9]+" PM"
             else:
-                timeconv=str(int(timetemp2[5:7])-12)
-                time=time+timeconv+":"+timetemp2[7:9]+" PM"
+                timeconv=str(int(timeraw[5:7])-12)
+                time=time+timeconv+":"+timeraw[7:9]+" PM"
 
             return time
+
+        def changeGP(gp):
+            self.gradepoints=gp
+        
