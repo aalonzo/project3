@@ -8,13 +8,19 @@ GLOBAL_PATH = os.getcwd()
 class Classbook:
     def __init__(self, id):
         self.fp = GLOBAL_PATH + "/gradebooks/" + id
-        if not os.path.exists(GLOBAL_PATH + "/gradebooks/" + id + "/weights.csv"):
+		
+		if not os.path.exists(self.fp):
+			os.mkdir(self.fp)
+        if not os.path.exists(self.fp + "/weights.csv"):
             file = open(self.fp + id + "/weights.csv", "w+")
             file.close()
-        if not os.path.exists(GLOBAL_PATH + "/gradebooks/" + id + "/grades.csv"):
-            file = open(GLOBAL_PATH + "/gradebooks/" + id + "/grades.csv", "w+")
+        if not os.path.exists(self.fp + "/grades.csv"):
+            file = open(self.fp + "/grades.csv", "w+")
             file.close()
 
+		grades = self.read("grades")
+		weights = self.read("weights")
+		
     def read(self, fileoption):
         file = open(self.fp + "/" + fileoption + ".csv")
         reader = csv.reader(file)
@@ -23,8 +29,7 @@ class Classbook:
             output.append(row)
         return output
 
-    grades = read("grades")
-    weights = read("weights")
+    
 
     def writeweight(self, name, weight):
         file = open(self.fp + "/weights.csv", "a")
@@ -57,5 +62,5 @@ class Classbook:
             sums.append(colsum)
             colsum = 0
         for x in range(len(sums)):
-            final += sums[x] * self.weights[x][1]
+            final += sums[x]/len(self.weightlist[x]) * self.weights[x][1]
         return final
