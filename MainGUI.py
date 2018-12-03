@@ -14,7 +14,7 @@ from search import *
 # some global variables for us to use throughout the program.
 BUTTON_SPACING = 50
 INSTALL_DIR = os.getcwd() + "/"
-WINDOW_TITLE = "Corgi Adventures"
+WINDOW_TITLE = "Start Page"
 WINDOW_WIDTH = "720"
 WINDOW_HEIGHT = "1024"
 WINDOW_COLOR = '#BEBEBE'
@@ -105,11 +105,9 @@ def main():
 	# using the functions above, I am able to update the scene accordingly
 	# and/or hide/show the text box by assigning the appropriate functions to their commands.
 	# each function's functionality will be explaind above.
-	prev = Button(text="Schedule", command=lambda: update_scene(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "Hi, I'm playing on the right side of the backyard!", "Max is on the right."))
-	next = Button(text="Professors", command=lambda: searchprog())
-	other = Button(text="Grades", command=lambda: update_scene(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_left.png", "Now I'm on the left!", "Max is on the left."))
-	#hide = Button(text="Hide", command=lambda: hide_text_box(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "", "The dialog box was hidden."))
-	#show = Button(text="Show", command=lambda: show_text_box(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "Hi again! :)", "The dialog box was brought back."))
+	prev = Button(text="Schedule", command=lambda: [window.destroy(), schedule()],  fg = "white", bg = "#f8971f")
+	next = Button(text="Professors", command=lambda: [window.destroy(), searchProg()],  fg = "white", bg = "#f8971f")
+	other = Button(text="Grades", command=lambda: [window.destroy(), professor()], fg = "white", bg = "#f8971f")
 	
 	# pack the buttons in the container. 
 	# since we want them to be in the bottom frame, we use in_ to achieve this.
@@ -117,18 +115,13 @@ def main():
 	next.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 	other.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 
-	#hide.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
-	#show.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 	prev.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 
 
 	# pack the frame we made onto the window
 	bottom_button_frame.pack(side="bottom", anchor="s", pady=50)
 
-	#then pack the dialog box and boom, we have a workable interface!
-	#dialog_box.pack(side="bottom", anchor="s", fill="none", ipadx=5, ipady=5)
 	
 	window.mainloop()
 
-# main function, pretty self-explanatory.
 main()
