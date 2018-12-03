@@ -116,7 +116,7 @@ class Gradebook:
 		end_label.pack(side=RIGHT, padx=30)
 
 		self.next.config(command=lambda: [wizard_win.destroy()])
-		self.cancel.config(command=lambda: self.wizard_page5(wizard_win), start_label.destroy(), end_label.destroy(), table_frame.destroy())
+		self.cancel.config(command=lambda: [self.wizard_page5(wizard_win), start_label.destroy(), end_label.destroy(), table_frame.destroy()])
 
 		self.inputs = []
 
@@ -136,18 +136,27 @@ class Gradebook:
 		for j in range(len(self.inputs)):
 			#print(str(self.inputs[j].get()))
 			frame = Frame(wizard_win, background="")
+			self.frames.append(frame)
 			frame.pack(side=TOP)
 			label = Label(frame, text=str(self.inputs[j]) + ":" )
+			self.labels.append(label)
 			label.pack(side=LEFT)
 			start_time = Entry(frame, width=20)
 			start_time.pack(side=LEFT)
 			end_time = Entry(frame, width=20)
 			end_time.pack(side=RIGHT)
+			self.entries.append(start_time)
+			self.entries.append(end_time)
 
 		# for j in range(len(self.inputs)):
 		# 		print("element ", str(j+1), str(self.inputs[j].get()))
 
 	def wizard_page5(self, wizard_win):
+		for i in range(len(self.num_classes)):
+			self.labels[i].destroy()
+			self.entries[i].destroy()
+			self.frames[i].destroy()
+
 		return None
 
 	def show_no_classes_screen(self):
