@@ -167,7 +167,7 @@ class Search_Bar(Frame):
         self.button_label.configure(background=self._button_activebackground)
     
 
-if __name__ == "__main__":
+def searchProg():
     try:
         from Tkinter import Tk
         from tkMessageBox import showinfo
@@ -224,12 +224,6 @@ if __name__ == "__main__":
 symbols. Please enter text containing only alphabetical characters and spaces.")
             raise Exception("Invalid Text Error")
             
-    
-    # def update_scene(root, milsec, filename):
-    #     self.img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + filename))
-    #     #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
-    #     self.master.after(milsec, self.panel.config(image = self.img))
-    #     self.master.update()
     def display_comment(result):
         res_window = Toplevel(root)
         res_window.geometry("800x600")
@@ -253,10 +247,13 @@ symbols. Please enter text containing only alphabetical characters and spaces.")
     root.config(background="#bf5700")
 
     img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "home.png").resize((800, 600), Image.ANTIALIAS))
-    # img = ImageTk.PhotoImage(Image.open(INSTALL_DIR + "home.png"))
     panel = Label(root, image = img, background="#bf5700")
 
 
     panel.place(relx=0.5, rely=0.5, anchor=CENTER)
     Search_Bar(root, command= command, placeholder="Search for professors...", entry_highlightthickness=0).pack(side=BOTTOM, pady=130, padx=3)
     root.mainloop()
+
+
+if __name__ == "__main__":
+    searchProg()

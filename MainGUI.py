@@ -105,9 +105,9 @@ def main():
 	# using the functions above, I am able to update the scene accordingly
 	# and/or hide/show the text box by assigning the appropriate functions to their commands.
 	# each function's functionality will be explaind above.
-	prev = Button(text="Schedule", command=lambda: schedule(),  fg = "white", bg = "#f8971f")
-	next = Button(text="Professors", command=lambda: searchprog(),  fg = "white", bg = "#f8971f")
-	other = Button(text="Grades", command=lambda: professor(), fg = "white", bg = "#f8971f")
+	prev = Button(text="Schedule", command=lambda: [window.destroy(), schedule()],  fg = "white", bg = "#f8971f")
+	next = Button(text="Professors", command=lambda: [window.destroy(), searchProg()],  fg = "white", bg = "#f8971f")
+	other = Button(text="Grades", command=lambda: [window.destroy(), professor()], fg = "white", bg = "#f8971f")
 	
 	# pack the buttons in the container. 
 	# since we want them to be in the bottom frame, we use in_ to achieve this.
