@@ -105,8 +105,8 @@ def main():
 	# using the functions above, I am able to update the scene accordingly
 	# and/or hide/show the text box by assigning the appropriate functions to their commands.
 	# each function's functionality will be explaind above.
-	prev = Button(text="Schedule", command=lambda: update_scene(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "Hi, I'm playing on the right side of the backyard!", "Max is on the right."))
-	next = Button(text="Professors", command=lambda: searchprog())
+	prev = Button(text="Schedule", command=lambda: update_scene(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "Hi, I'm playing on the right side of the backyard!", "Max is on the right."), ,  fg = "white", bg = "#f8971f")
+	next = Button(text="Professors", command=lambda: searchprog(),  fg = "white", bg = "#f8971f")
 	other = Button(text="Grades", command=lambda: update_scene(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_left.png", "Now I'm on the left!", "Max is on the left."))
 	#hide = Button(text="Hide", command=lambda: hide_text_box(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "", "The dialog box was hidden."))
 	#show = Button(text="Show", command=lambda: show_text_box(bg_image, bottom_button_frame, dialog_box, status_bar, "corgi_backyard_right.png", "Hi again! :)", "The dialog box was brought back."))

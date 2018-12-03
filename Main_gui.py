@@ -2,6 +2,7 @@ from tkinter import *
 
 root = Tk()
 root.geometry("800x600")
+root.title(string="Main Menu")
 frame = Frame(root)
 frame.pack()
 
