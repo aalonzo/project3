@@ -50,7 +50,7 @@ class Course:
         def changeGP(self,gp):
             self.gradepoints=gp
         
-        def compareDays(self,other):
+        def sameDays(self,other):
             timeraw1=str(other.getTimecode())
             timeraw2=str(self.timecode)
             daylist1=list(timeraw1[0:5])
@@ -62,8 +62,8 @@ class Course:
             for i in daylist1:
                 for j in daylist2:
                     if i==j:
-                        return False
-            return True
+                        return True
+            return False
                 
         def getStartTime(self):
             timeraw=str(self.timecode)
@@ -74,7 +74,7 @@ class Course:
             return int(timeraw[5:9])
         
         def compareTimes(self,other):
-            if other.getTimeDayCode()==self.getTimeDayCode():
+            if sameDays(self,other):
                 if other.getStartTime()==self.getStartTime():
                     return False
                 elif other.getStartTime()<=self.getStartTime() and other.getEndTime()>self.getStartTime():
