@@ -48,8 +48,8 @@ class Gradebook:
 	def load_schedule(self):
 		self.unshow_no_class_widgets()
 		#;)
-		#self.window.after(5000, self.show_schedule())
-		self.show_schedule()
+		self.window.after(5000, self.show_schedule())
+		# self.show_schedule()
 
 
 	def show_schedule(self):
