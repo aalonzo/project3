@@ -1,4 +1,4 @@
-''' author: Adrian Alonzo
+''' author: Adrian Alonzo, Raleigh Melancon, Sally, Ryan, Sunny, Jonathon, Nick, Luis.
 	filename: Example.py
 	purpose: to demonstrate how to superimpose a text field and buttons
 			 on top of a scene, as well as hide/show the text field.
