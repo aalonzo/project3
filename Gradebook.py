@@ -38,9 +38,12 @@ class Gradebook:
 	def setup_no_classes_objects(self):
 		self.text = Label(self.window, text="Welcome to the Gradebook application!\nNo classes have been added.  Use the Create Schedule wizard to add classes to your schedule.", fg="black")
 		self.bottom_button_frame = Frame(self.window, background="", width=100)
+		#self.bottom_button_frame = Frame(self.window, background="", width=100)
+
 
 		self.make_schedule = Button(self.bottom_button_frame, text="Create Schedule", command=lambda: [self.init_wizard()])
 		self.close_module = Button(self.bottom_button_frame, text="Close Program", command=lambda: self.window.destroy())
+		self.load_schedule = Button(self.bottom_button_frame, text="Load Schedule", command=lambda: [self.init_wizard()])
 
 	def init_wizard(self):
 		wizard = Wizard(self.window)
@@ -49,7 +52,8 @@ class Gradebook:
 		self.text.pack(side=TOP, pady=50)
 		self.bottom_button_frame.pack(side=BOTTOM, pady=50, ipadx=20)
 		self.make_schedule.pack(side=LEFT, ipadx=5, ipady=5)
-		self.close_module.pack(side=RIGHT, ipadx=5, ipady=5) 
+		self.load_schedule.pack(side=LEFT, ipadx=5, ipady=5)
+		self.close_module.pack(side=LEFT, ipadx=5, ipady=5)
 
 	def unshow_no_class_widgets(self):
 		self.text.pack_forget()
@@ -214,7 +218,7 @@ class Wizard:
 
 		return fields
 
-	def wizard_page5
+	#def wizard_page5
 
 
 
