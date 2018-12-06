@@ -15,8 +15,8 @@ import sys
 import os.path
 import turtle
 
-SUITE_TITLE = "LearnIt"
-PROGRAM = "Gradebook"
+SUITE_TITLE = ""
+PROGRAM = "Scheduler"
 PROG_TITLE = SUITE_TITLE + " " + PROGRAM
 
 
@@ -36,14 +36,105 @@ class Gradebook:
 		self.setup_no_classes_objects()
 
 	def setup_no_classes_objects(self):
-		self.text = Label(self.window, text="Welcome to the Gradebook application!\nNo classes have been added.  Use the Create Schedule wizard to add classes to your schedule.", fg="black")
+		self.text = Label(self.window, text="Welcome to the Scheduler application!\nNo classes have been added.  Use the Create Schedule wizard to add classes to your schedule, or load a previously saved one.", fg="black", wraplength=600)
 		self.bottom_button_frame = Frame(self.window, background="", width=100)
-		#self.bottom_button_frame = Frame(self.window, background="", width=100)
 
+		#self.make_schedule = Button(self.bottom_button_frame, text="Create Schedule", command=lambda: [self.init_wizard()])
 
 		self.make_schedule = Button(self.bottom_button_frame, text="Create Schedule", command=lambda: [self.init_wizard()])
+		self.load = Button(self.bottom_button_frame, text="Load Schedule", command=lambda: [self.load_schedule()])
 		self.close_module = Button(self.bottom_button_frame, text="Close Program", command=lambda: self.window.destroy())
-		self.load_schedule = Button(self.bottom_button_frame, text="Load Schedule", command=lambda: [self.init_wizard()])
+
+	def load_schedule(self):
+		self.unshow_no_class_widgets()
+		#;)
+		#self.window.after(5000, self.show_schedule())
+		self.show_schedule()
+
+
+	def show_schedule(self):
+		schedule_name = Label(self.window, text="Jane Doe's Schedule", font=('Arial', 16), fg="black", padx=5, pady=10, justify=LEFT)
+		schedule_name.pack(side=TOP, anchor="nw")
+		table_header_frame = Frame(self.window)
+		table_header_frame.pack(side=TOP, anchor="nw", padx=50, pady=5)
+
+
+
+
+		class_header = Label(table_header_frame, text="Class", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		class_header.pack(side=LEFT, anchor="nw")
+		time_header = Label(table_header_frame, text="Time", font=('Arial', 14), fg="black", padx=50, pady=10, justify=LEFT)
+		time_header.pack(side=LEFT, anchor="nw")
+		prof_header = Label(table_header_frame, text="Professor", font=('Arial', 14), fg="black", padx=145, pady=10, justify=LEFT)
+		prof_header.pack(side=LEFT, anchor="nw")
+		prof_header = Label(table_header_frame, text="Difficulty", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		prof_header.pack(side=LEFT, anchor="nw")
+
+
+
+		schedule_frame = Frame(self.window, bd=2)
+		schedule_frame.pack(side=TOP, anchor="nw", padx=50, pady=15)
+
+		class1_frame = Frame(schedule_frame)
+		class1_frame.pack(side=TOP, anchor="w")
+		class2_frame = Frame(schedule_frame)
+		class2_frame.pack(side=TOP, anchor="w")
+		class3_frame = Frame(schedule_frame)
+		class3_frame.pack(side=TOP, anchor="w")
+		class4_frame = Frame(schedule_frame)
+		class4_frame.pack(side=TOP, anchor="w")
+
+		class1 = Label(class1_frame, text="AST301", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		class1.pack(side=LEFT, anchor="nw")
+
+		time1 = Label(class1_frame, text="TTH, 12:30 PM to 2:00 PM", font=('Arial', 14), fg="black", padx=40, pady=10, justify=LEFT)
+		time1.pack(side=LEFT)
+		prof1 = Label(class1_frame, text="Donald Winget", font=('Arial', 14), fg="black", padx=15, pady=10, justify=LEFT)
+		prof1.pack(side=LEFT)
+		diff1 = Label(class1_frame, text="2.9", font=('Arial', 14), fg="black", padx=95, pady=10, justify=LEFT)
+		diff1.pack(side=LEFT)
+
+		other_button_frame = Frame(self.window)
+		other_button_frame.pack(side=BOTTOM, pady=50)
+		# add_button = Button(other_button_frame, text="Add Class", padx=5, pady=5, command=lambda: self.add_to_schedule())
+		# add_button.pack(side=BOTTOM)
+
+
+
+		class2 = Label(class2_frame, text="SOC379M", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		class2.pack(side=LEFT, anchor="nw")
+		time2 = Label(class2_frame, text="TTH, 2:00 PM to 3:30 PM", font=('Arial', 14), fg="black", padx=25, pady=10, justify=RIGHT)
+		time2.pack(side=LEFT)
+		prof2 = Label(class2_frame, text="Ari Adut", font=('Arial', 14), fg="black", padx=40, pady=10, justify=LEFT)
+		prof2.pack(side=LEFT)
+		diff2 = Label(class2_frame, text="2.3", font=('Arial', 14), fg="black", padx=300, pady=10, justify=LEFT)
+		diff2.pack(side=LEFT)
+		# class3 = Label(class3_frame, text="CS329E", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		# class3.pack(side=LEFT, anchor="nw")
+		# time3 = Label(class3_frame, text="TTH, 11:00 AM to 12:30 PM", font=('Arial', 14), fg="black", padx=40, pady=10, justify=RIGHT)
+		# time3.pack(side=LEFT)
+		# prof3 = Label(class3_frame, text="Stephany Coffman-Wolph", font=('Arial', 14), fg="black", padx=10, pady=10, justify=LEFT)
+		# prof3.pack(side=LEFT)
+		# diff3 = Label(class3_frame, text="1.6", font=('Arial', 14), fg="black", padx=250, pady=10, justify=LEFT)
+		# diff3.pack(side=LEFT)
+		class4 = Label(class4_frame, text="SOC317L", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		class4.pack(side=LEFT, anchor="nw")
+		time4 = Label(class4_frame, text="MWF, 11:00 AM to 12:30 PM", font=('Arial', 14), fg="black", padx=35, pady=10, justify=RIGHT)
+		time4.pack(side=LEFT)
+		prof4 = Label(class4_frame, text="Ken-Hou Lin", font=('Arial', 14), fg="black", padx=5, pady=5, justify=LEFT)
+		prof4.pack(side=LEFT)
+		diff4 = Label(class4_frame, text="1.8", font=('Arial', 14), fg="black", padx=500, pady=10, justify=LEFT)
+		diff4.pack(side=LEFT)
+
+	def add_to_schedule(self):
+		self.addwin = Toplevel(self.window)
+		self.addwin.geometry("800x600")
+
+		header = Label(self.addwin, text="  Add Class", font=('Arial', 28), bg="#bf5700", fg="white", anchor="nw", padx=5, pady=10, justify=LEFT)
+		header.pack(side=TOP, anchor="nw", fill="x")
+
+		addwin.mainloop()
+
 
 	def init_wizard(self):
 		wizard = Wizard(self.window)
@@ -51,14 +142,15 @@ class Gradebook:
 	def show_no_classes_screen(self):
 		self.text.pack(side=TOP, pady=50)
 		self.bottom_button_frame.pack(side=BOTTOM, pady=50, ipadx=20)
-		self.make_schedule.pack(side=LEFT, ipadx=5, ipady=5)
-		self.load_schedule.pack(side=LEFT, ipadx=5, ipady=5)
-		self.close_module.pack(side=LEFT, ipadx=5, ipady=5)
+		self.make_schedule.pack(side=LEFT, padx=5, ipadx=5, ipady=5)
+		self.load.pack(side=LEFT, padx=5, ipadx=5, ipady=5)
+		self.close_module.pack(side=LEFT, padx=5, ipadx=5, ipady=5) 
 
 	def unshow_no_class_widgets(self):
 		self.text.pack_forget()
 		self.bottom_button_frame.pack_forget()
 		self.make_schedule.pack_forget()
+		self.load.pack_forget()
 		self.close_module.pack_forget()
 
 	def get_data(self):
@@ -217,8 +309,6 @@ class Wizard:
 			fields.append(sublist)
 
 		return fields
-
-	#def wizard_page5
 
 
 
