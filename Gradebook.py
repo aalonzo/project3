@@ -408,10 +408,3 @@ class Wizard:
 	# 		self.frames[i].destroy()
 
 	# 	return None
-
-
-
-
-root = Tk()
-my_gui = Gradebook(root)
-root.mainloop()
