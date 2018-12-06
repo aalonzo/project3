@@ -109,14 +109,6 @@ class Gradebook:
 		prof2.pack(side=LEFT)
 		diff2 = Label(class2_frame, text="2.3", font=('Arial', 14), fg="black", padx=300, pady=10, justify=LEFT)
 		diff2.pack(side=LEFT)
-		# class3 = Label(class3_frame, text="CS329E", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
-		# class3.pack(side=LEFT, anchor="nw")
-		# time3 = Label(class3_frame, text="TTH, 11:00 AM to 12:30 PM", font=('Arial', 14), fg="black", padx=40, pady=10, justify=RIGHT)
-		# time3.pack(side=LEFT)
-		# prof3 = Label(class3_frame, text="Stephany Coffman-Wolph", font=('Arial', 14), fg="black", padx=10, pady=10, justify=LEFT)
-		# prof3.pack(side=LEFT)
-		# diff3 = Label(class3_frame, text="1.6", font=('Arial', 14), fg="black", padx=250, pady=10, justify=LEFT)
-		# diff3.pack(side=LEFT)
 		class4 = Label(class4_frame, text="SOC317L", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
 		class4.pack(side=LEFT, anchor="nw")
 		time4 = Label(class4_frame, text="MWF, 11:00 AM to 12:30 PM", font=('Arial', 14), fg="black", padx=35, pady=10, justify=RIGHT)
@@ -125,6 +117,10 @@ class Gradebook:
 		prof4.pack(side=LEFT)
 		diff4 = Label(class4_frame, text="1.8", font=('Arial', 14), fg="black", padx=500, pady=10, justify=LEFT)
 		diff4.pack(side=LEFT)
+		average_frame = Frame(self.window)
+		average_frame.pack(side=TOP)
+		average= Label(average_frame, text="Semester Difficulty (Avg of Prof. Difficulties): 2.3", font=('Arial', 14), fg="black", padx=5, pady=10, justify=LEFT)
+		average.pack(side=LEFT)
 
 	def add_to_schedule(self):
 		self.addwin = Toplevel(self.window)
@@ -408,3 +404,10 @@ class Wizard:
 	# 		self.frames[i].destroy()
 
 	# 	return None
+
+
+
+
+root = Tk()
+my_gui = Gradebook(root)
+root.mainloop()
