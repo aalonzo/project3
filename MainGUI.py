@@ -9,6 +9,7 @@ from PIL import ImageTk,Image
 import os.path
 import io
 from search import *
+from Gradebook import *
 
 
 # some global variables for us to use throughout the program.
@@ -73,7 +74,11 @@ def hide_text_box(bg_image_widget, button_frame, dialog_widget, sb_widget, image
 def show_text_box(bg_image_widget, button_frame, dialog_widget, sb_widget, image_name, text_dialog, sb_text):
 	dialog_widget.pack(side="bottom", anchor="s", fill="none", ipadx=5, ipady=5)
 	update_scene(bg_image_widget, button_frame, dialog_widget, sb_widget, image_name, text_dialog, sb_text)
-
+	
+def show_scheduler():
+	root = Tk()
+	my_gui = Gradebook(root)
+	root.mainloop()
 
 def main():
 	window = Tk() # create window
@@ -105,15 +110,15 @@ def main():
 	# using the functions above, I am able to update the scene accordingly
 	# and/or hide/show the text box by assigning the appropriate functions to their commands.
 	# each function's functionality will be explaind above.
-	prev = Button(text="Schedule", command=lambda: [window.destroy(), schedule()],  fg = "white", bg = "#f8971f")
+	prev = Button(text="Schedule", command=lambda: [show_scheduler(), window.destroy()],  fg = "white", bg = "#f8971f")
 	next = Button(text="Professors", command=lambda: [window.destroy(), searchProg()],  fg = "white", bg = "#f8971f")
-	other = Button(text="Grades", command=lambda: [window.destroy(), professor()], fg = "white", bg = "#f8971f")
+	#other = Button(text="Grades", command=lambda: [window.destroy(), professor()], fg = "white", bg = "#f8971f")
 	
 	# pack the buttons in the container. 
 	# since we want them to be in the bottom frame, we use in_ to achieve this.
 	# we then do some magic with padding to get the configuration you'll see in the window.
 	next.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
-	other.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
+# 	other.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 
 	prev.pack(in_=bottom_button_frame, side="left", ipadx=5, ipady=5, padx=BUTTON_SPACING)
 
